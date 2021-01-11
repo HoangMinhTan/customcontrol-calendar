@@ -86,6 +86,7 @@ function addDay(classname, content, date, status){
         else 
         {
           selectedMonth = date.getMonth();
+          selectedYear = date.getFullYear();
         }
       }
       else if (status == 2){
@@ -97,20 +98,29 @@ function addDay(classname, content, date, status){
         else 
         {
           selectedMonth = date.getMonth()+2;
+          selectedYear = date.getFullYear();
         }
       }
       else {
         selectedMonth = date.getMonth()+1;
+        selectedYear = date.getFullYear();
       }
       renderCalendar();
     });
     monthDays.appendChild(day_element);
 }
 
-function compareMonth(a,b)
+function compareMonth(content,date,status)
 {
-  if ((a == 12 && b == 0) || (a == 1 && b == 13) || a == b) return true;
-  else return false;
+  if (selectedDate == content)
+  {
+    if (status == 0)
+    {
+      if ((selectedMonth == 12 && date.getMonth() == 0) || (selectedMonth == date.getMonth())) 
+        return true;
+    }
+    es
+  }
 }
 
 document.querySelector(".prev").addEventListener("click", () => {
