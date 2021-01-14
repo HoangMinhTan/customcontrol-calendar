@@ -69,13 +69,11 @@ function addDay(classname, content, date, status){
     day_element.classList.add(classname);
     day_element.textContent = content;
 
-    if ((selectedDate == content && compareMonth(selectedMonth, date.getMonth()) && status == 0) || 
-        (selectedDate == content && compareMonth(selectedMonth, date.getMonth()+1) && status == 1) || 
-        (selectedDate == content && compareMonth(selectedMonth, date.getMonth()+2) && status == 2))
+    if (compareDate(content, date, status))
       day_element.classList.add('selected');
 
+
     day_element.addEventListener("click", function(){
-      day_element.classList.add('selected');
       selectedDate = content;
       if (status == 0){
         if (date.getMonth() == 0)
@@ -110,16 +108,26 @@ function addDay(classname, content, date, status){
     monthDays.appendChild(day_element);
 }
 
-function compareMonth(content,date,status)
+function compareDate(content,date,status)
 {
   if (selectedDate == content)
   {
     if (status == 0)
     {
-      if ((selectedMonth == 12 && date.getMonth() == 0) || (selectedMonth == date.getMonth())) 
+      if ((selectedMonth == 12 && date.getMonth() == 0 && selectedYear == (date.getFullYear()-1) ) || ((selectedMonth == date.getMonth()) && selectedYear == date.getFullYear()) )
         return true;
     }
-    es
+    else if (status == 1)
+    {
+      if (selectedMonth == date.getMonth()+1 && selectedYear == date.getFullYear())
+        return true;
+    }
+    else
+    {
+      if ((selectedMonth == 0 && date.getMonth ==11 && selectedYear == (date.getFullYear()+1)) || ((selectedMonth == date.getMonth()+2) && selectedYear == date.getFullYear()))
+        return true;
+    }
+    return false;
   }
 }
 
